@@ -1,6 +1,41 @@
 import * as readline from "readline";
 import * as fs from "fs";
 
+/**
+ * Check if the password is compliant with policy 1
+ * @param password Password
+ * @param letter Desired letter
+ * @param minOccurances Mininum occurances
+ * @param maxOccurances Maximum occurances
+ */
+const isPolicy1Compliant = (
+  password: string,
+  letter: string,
+  minOccurances: number,
+  maxOccurances: number
+): boolean => {
+  const occurances = password.split("").filter((char) => char === letter)
+    .length;
+
+  return occurances >= minOccurances && occurances <= maxOccurances;
+};
+
+/**
+ * Check if the password is compliant with policy 2
+ * @param password Password
+ * @param letter Desired letter
+ * @param pos1 First position (1-indexed)
+ * @param pos2 Second position (1-indexed)
+ */
+const isPolicy2Compliant = (
+  password: string,
+  letter: string,
+  pos1: number,
+  pos2: number
+): boolean => {
+  return (password[pos1 - 1] === letter) !== (password[pos2 - 1] === letter);
+};
+
 (async (filePath: string) => {
   const rl = readline.createInterface({
     input: fs.createReadStream(filePath),
@@ -10,22 +45,20 @@ import * as fs from "fs";
     validPasswordsPart2 = 0;
 
   for await (const line of rl) {
-    let [range, letter, password]: string[] = line.split(" ");
-    letter = letter![0];
-    const [min, max]: number[] = range!.split("-").map(Number);
+    const groups = line.match(
+      /(?<min>\d+)-(?<max>\d+) (?<letter>[a-z]): (?<password>\w+)/i
+    )?.groups!;
 
-    // Part 1
-    const countOfDesiredLetter: number = password!
-      .split("")
-      .filter((currentLetter) => currentLetter === letter).length;
-    if (countOfDesiredLetter >= min! && countOfDesiredLetter <= max!) {
+    const min = Number(groups.min),
+      max = Number(groups.max),
+      letter = groups.letter!,
+      password = groups.password!;
+
+    if (isPolicy1Compliant(password, letter, min, max)) {
       ++validPasswordsPart1;
     }
 
-    // Part 2
-    const position1 = password![min! - 1] === letter,
-      position2 = password![max! - 1] === letter;
-    if ((position1 && !position2) || (!position1 && position2)) {
+    if (isPolicy2Compliant(password, letter, min, max)) {
       ++validPasswordsPart2;
     }
   }
