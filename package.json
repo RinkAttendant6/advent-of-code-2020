@@ -2,22 +2,20 @@
   "name": "advent-of-code-2020",
   "version": "1.0.0",
   "description": "Advent of Code 2020 Solutions",
+  "private": true,
   "dependencies": {
     "typescript": "^4.1.2"
   },
   "devDependencies": {
     "@types/node": "^14.14.10",
-    "husky": "^4.3.0",
+    "husky": "^5.0",
     "lint-staged": "^10.5.2",
     "prettier": "^2.2.1"
   },
-  "scripts": {},
-  "author": "Vincent Diep",
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+  "scripts": {
+    "postinstall": "husky install"
   },
+  "author": "Vincent Diep",
   "lint-staged": {
     "*.{js,ts,md}": "prettier --write"
   },
