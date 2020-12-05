@@ -1,7 +1,7 @@
 import * as fs from "fs";
 import * as readline from "readline";
 
-(async (filePath: string) => {
+(async (filePath: string = __dirname + "/input.txt") => {
   const rl = readline.createInterface({
     input: fs.createReadStream(filePath),
   });
@@ -32,4 +32,4 @@ import * as readline from "readline";
       break;
     }
   }
-})(__dirname + "/input.txt");
+})(process.argv[2]);

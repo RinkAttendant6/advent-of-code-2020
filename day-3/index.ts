@@ -28,7 +28,7 @@ const findTrees = async (
   return trees;
 };
 
-(async (filePath: string) => {
+(async (filePath: string = __dirname + "/input.txt") => {
   let part1 = await findTrees(filePath, 3);
   console.log(part1);
 
@@ -42,4 +42,4 @@ const findTrees = async (
 
   console.debug(part2);
   console.log(part2.reduce((accumulator, value) => accumulator * value, 1));
-})(__dirname + "/input.txt");
+})(process.argv[2]);

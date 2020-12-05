@@ -36,7 +36,7 @@ const isPolicy2Compliant = (
   return (password[pos1 - 1] === letter) !== (password[pos2 - 1] === letter);
 };
 
-(async (filePath: string) => {
+(async (filePath: string = __dirname + "/input.txt") => {
   const rl = readline.createInterface({
     input: fs.createReadStream(filePath),
   });
@@ -64,4 +64,4 @@ const isPolicy2Compliant = (
   }
 
   console.log(validPasswordsPart1, validPasswordsPart2);
-})(__dirname + "/input.txt");
+})(process.argv[2]);

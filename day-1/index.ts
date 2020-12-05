@@ -19,8 +19,8 @@ const readInputFromFile = async (filePath: string): Promise<any[]> => {
   return output;
 };
 
-(async () => {
-  const numbers: number[] = await readInputFromFile(__dirname + "/input.txt");
+(async (filePath: string = __dirname + "/input.txt") => {
+  const numbers: number[] = await readInputFromFile(filePath);
 
   // Part 1
   for (let i = 0; i < numbers.length - 1; ++i) {
@@ -59,4 +59,4 @@ const readInputFromFile = async (filePath: string): Promise<any[]> => {
       }
     }
   }
-})();
+})(process.argv[2]);

@@ -30,7 +30,9 @@ const isValidPassport2 = (passport: string): boolean =>
     /\bpid:\d{9}\b/,
   ].every((regex) => regex.test(passport));
 
-const data = fs.readFileSync(__dirname + "/input.txt", { encoding: "utf8" });
+const data = fs.readFileSync(process.argv[2] || __dirname + "/input.txt", {
+  encoding: "utf8",
+});
 const passports = data.split("\n\n");
 
 const part1 = passports.filter(isValidPassport1).length;
