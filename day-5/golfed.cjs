@@ -1,0 +1,5 @@
+(async _=>{s=Array(w=1024).fill(f=i=m=0)
+for await(l of _('readline').createInterface({input:_('fs').createReadStream(__dirname+`/input.txt`)})){l=l.replace(/[FL]/g,0).replace(/[BR]/g,1)
+m=Math.max(m,d=eval('0b'+l))
+s[d]=1}for(;f=f||s[i],i<w;++i)if(f&&!s[i]){console.log(m,i)
+break}})(require)
