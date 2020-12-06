@@ -2,18 +2,22 @@ import * as fs from "fs";
 
 const filePath: string = process.argv[2] ?? __dirname + "/input.txt";
 
-const groups: string[] = fs
+const groups: string[][] = fs
   .readFileSync(filePath, { encoding: "utf8" })
   .trim()
-  .split("\n\n");
+  .split("\n\n")
+  .map((group: string): string[] => group.split("\n"));
 
+// Unique union set of answers for entire group
 const part1: number = groups
-  .map((group: string): number => new Set([...group.replace(/\n/g, "")]).size)
+  .map((answers: string[]): number => {
+    return new Set(answers.join("")).size;
+  })
   .reduce((acc, v) => acc + v, 0);
 
+// Unique intersection set of answers for entire group
 const part2: number = groups
-  .map((group: string): number => {
-    const answers = group.split("\n");
+  .map((answers: string[]): number => {
     const commonAnswers = [...answers[0]!]
       .filter((letter) => answers.every((answer) => answer.includes(letter)))
       .flat();
