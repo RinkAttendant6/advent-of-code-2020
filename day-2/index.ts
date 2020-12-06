@@ -14,8 +14,7 @@ const isPolicy1Compliant = (
   minOccurances: number,
   maxOccurances: number
 ): boolean => {
-  const occurances = password.split("").filter((char) => char === letter)
-    .length;
+  const occurances = [...password].filter((char) => char === letter).length;
 
   return occurances >= minOccurances && occurances <= maxOccurances;
 };
