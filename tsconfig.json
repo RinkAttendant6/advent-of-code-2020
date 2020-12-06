@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig.json to read more about this file */
+    "target": "ES2019",
 
     /* Strict Type-Checking Options */
     "strict": true,                           /* Enable all strict type-checking options. */
