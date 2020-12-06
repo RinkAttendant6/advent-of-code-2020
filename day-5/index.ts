@@ -6,9 +6,7 @@ import * as readline from "readline";
     input: fs.createReadStream(filePath),
   });
 
-  const seats: boolean[] = Array(128 * 8).fill(false);
-
-  let max = 0;
+  const seats: number[] = [];
 
   for await (let line of rl) {
     line = line.replace(/[FL]/g, "0").replace(/[BR]/g, "1");
@@ -17,19 +15,14 @@ import * as readline from "readline";
     const col = Number.parseInt(line.slice(-3), 2);
     const id = row * 8 + col;
 
-    seats![id] = true;
-
-    max = Math.max(max, id);
+    seats.push(id);
   }
 
-  console.log(max);
+  seats.sort((a, b) => a - b);
 
-  for (let i = 0, firstSeatFound = false; i < seats.length; ++i) {
-    firstSeatFound = firstSeatFound || seats[i]!;
+  const maxId = Math.max(...seats);
+  const firstSeatId: number = seats[0]!;
+  const firstGap = seats.find((id, index) => id - firstSeatId !== index);
 
-    if (firstSeatFound && !seats[i]) {
-      console.log(i);
-      break;
-    }
-  }
+  console.log(maxId, firstGap! - 1);
 })(process.argv[2]);
