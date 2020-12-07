@@ -60,25 +60,23 @@ const findBagsInside = (hashmap: BagMap, bag: string): number => {
     input: fs.createReadStream(filePath),
   });
 
-  const lines: BagMap = {};
+  const bags: BagMap = {};
 
   for await (let line of rl) {
-    const [outer, contents]: string[] = line.split(" bags contain ");
+    const bag = line.match(/^([\w ]+?) bags/)?.[1]!;
+    const matches = line.matchAll(/(?<qty>\d+) (?<colour>[\w ]+) bag[s.,]?/g);
 
     let inner: BagContents = {};
 
-    contents!.split(", ").forEach((bag: string) => {
-      let matches = bag.match(/(?<qty>\d+) (?<colour>[\w ]+) bags?/)?.groups;
-      if (matches) {
-        inner[matches.colour!] = Number(matches.qty);
-      }
-    });
+    for (const match of matches) {
+      inner[match.groups!.colour!] = Number(match.groups!.qty);
+    }
 
-    lines[outer!] = inner;
+    bags[bag] = inner;
   }
 
   console.log(
-    findPotentialOuterBags(lines, "shiny gold").size,
-    findBagsInside(lines, "shiny gold")
+    findPotentialOuterBags(bags, "shiny gold").size,
+    findBagsInside(bags, "shiny gold")
   );
 })(process.argv[2]);
