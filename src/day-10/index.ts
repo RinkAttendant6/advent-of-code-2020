@@ -1,16 +1,10 @@
-import * as fs from "fs";
+import { parseNumericInput } from "../shared/utils.js";
 
 interface IEdgeList {
   [key: number]: number[];
 }
 
-const data: number[] = fs
-  .readFileSync(process.argv[2] || __dirname + "/input.txt", {
-    encoding: "utf8",
-  })
-  .trim()
-  .split("\n")
-  .map(Number);
+const data = parseNumericInput(process.argv[2] ?? __dirname + "/input.txt");
 
 const numbers = [0, ...data];
 const max = Math.max(...numbers);

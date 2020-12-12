@@ -1,4 +1,4 @@
-import * as fs from "fs";
+import { parseNumericInput } from "../shared/utils.js";
 
 /**
  * Calculate sums of all pairs of numbers
@@ -16,13 +16,7 @@ const findAllSums = (numbers: number[]): number[] => {
   return sums;
 };
 
-const data: number[] = fs
-  .readFileSync(process.argv[2] || __dirname + "/input.txt", {
-    encoding: "utf8",
-  })
-  .trim()
-  .split("\n")
-  .map(Number);
+const data = parseNumericInput(process.argv[2] ?? __dirname + "/input.txt");
 
 let part1 = -Infinity;
 

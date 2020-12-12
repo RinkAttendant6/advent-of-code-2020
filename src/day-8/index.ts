@@ -1,4 +1,4 @@
-import * as fs from "fs";
+import { parseInput } from "../shared/utils.js";
 
 interface IResult {
   condition: "outOfBounds" | "loop";
@@ -42,11 +42,7 @@ const finitelyEvaluate = (instructions: string[]): IResult => {
   }
 };
 
-const lines: string[] = fs
-  .readFileSync(process.argv[2] || __dirname + "/input.txt", {
-    encoding: "utf8",
-  })
-  .split("\n");
+const lines: string[] = parseInput(process.argv[2] ?? __dirname + "/input.txt");
 
 // Part 1
 console.log(finitelyEvaluate(lines).value);

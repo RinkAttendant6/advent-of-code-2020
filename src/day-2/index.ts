@@ -1,5 +1,4 @@
-import * as readline from "readline";
-import * as fs from "fs";
+import { parseInputAsync } from "../shared/utils.js";
 
 /**
  * Check if the password is compliant with policy 1
@@ -36,14 +35,10 @@ const isPolicy2Compliant = (
 };
 
 (async (filePath: string = __dirname + "/input.txt") => {
-  const rl = readline.createInterface({
-    input: fs.createReadStream(filePath),
-  });
-
   let validPasswordsPart1 = 0,
     validPasswordsPart2 = 0;
 
-  for await (const line of rl) {
+  for await (const line of parseInputAsync(filePath)) {
     const groups = line.match(
       /(?<min>\d+)-(?<max>\d+) (?<letter>[a-z]): (?<password>\w+)/i
     )?.groups!;

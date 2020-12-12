@@ -1,5 +1,4 @@
-import * as fs from "fs";
-import * as readline from "readline";
+import { parseInputAsync } from "../shared/utils.js";
 
 interface BagMap {
   [key: string]: BagContents;
@@ -56,13 +55,9 @@ const findBagsInside = (hashmap: BagMap, bag: string): number => {
 };
 
 (async (filePath: string = __dirname + "/input.txt") => {
-  const rl = readline.createInterface({
-    input: fs.createReadStream(filePath),
-  });
-
   const bags: BagMap = {};
 
-  for await (let line of rl) {
+  for await (let line of parseInputAsync(filePath)) {
     const bag = line.match(/^([\w ]+?) bags/)?.[1]!;
     const matches = line.matchAll(/(?<qty>\d+) (?<colour>[\w ]+) bag[s.,]?/g);
 

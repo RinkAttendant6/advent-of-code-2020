@@ -1,20 +1,15 @@
-import * as readline from "readline";
-import * as fs from "fs";
+import { parseInputAsync } from "../shared/utils.js";
 
 const findTrees = async (
   filePath: string,
   right: number = 1,
   down: number = 1
 ): Promise<number> => {
-  const rl = readline.createInterface({
-    input: fs.createReadStream(filePath),
-  });
-
   let x = 0,
     y = 0,
     trees = 0;
 
-  for await (const line of rl) {
+  for await (const line of parseInputAsync(filePath)) {
     if (y % down === 0) {
       if (line[x % line.length] === "#") {
         ++trees;

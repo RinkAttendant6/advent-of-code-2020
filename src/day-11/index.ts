@@ -1,4 +1,4 @@
-import * as fs from "fs";
+import { parseInput } from "../shared/utils.js";
 
 type ILayout = string[];
 
@@ -132,12 +132,7 @@ const countOccupiedSeats = (layout: ILayout): number => {
   );
 };
 
-const data: ILayout = fs
-  .readFileSync(process.argv[2] || __dirname + "/input.txt", {
-    encoding: "utf8",
-  })
-  .trim()
-  .split("\n");
+const data: ILayout = parseInput(process.argv[2] ?? __dirname + "/input.txt");
 
 const results1: ILayout[] = [data];
 
