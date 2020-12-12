@@ -3,7 +3,7 @@ if(w[0]=='a')a+=+w.slice(4)
 w[0]=='j'?p+=+w.slice(4):p++
 if(p<0|p>=D.length)return{w,a}
 if(h.includes(p))return{a}}}
-d=require('fs').readFileSync(__dirname+'/input.txt',{encoding:'utf8'}).split`
+d=require('fs').readFileSync(process.argv[2],{encoding:'utf8'}).split`
 `
 for(i=d.length;--i;){c=[...d]
 q=d[i]

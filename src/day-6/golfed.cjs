@@ -1,4 +1,4 @@
-d=require('fs').readFileSync(__dirname+`/input.txt`,{encoding:"utf8"}).split`
+d=require('fs').readFileSync(process.argv[2],{encoding:"utf8"}).split`
 
 `.map(g=>g.split`
 `)

@@ -1,5 +1,5 @@
 a=b=0
-require('fs').readFileSync(__dirname+`/input.txt`,{encoding:'utf8'}).split`
+require('fs').readFileSync(process.argv[2],{encoding:'utf8'}).split`
 `.map(n=>{[x,y,l,,w]=n.split(/[ :-]/)
 c=[...w].filter(c=>c==l).length
 a+=c>=x&c<=y

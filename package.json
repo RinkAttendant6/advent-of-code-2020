@@ -13,6 +13,7 @@
     "prettier": "^2.2.1"
   },
   "scripts": {
+    "golf": "node ./scripts/golf.js",
     "postinstall": "husky install"
   },
   "author": "Vincent Diep",

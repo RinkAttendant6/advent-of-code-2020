@@ -1,4 +1,4 @@
-require(`fs`).readFileSync(__dirname+`/input.txt`,{encoding:"utf8"}).split`
+require(`fs`).readFileSync(process.argv[2],{encoding:"utf8"}).split`
 `.map(e=>{i={}
 for([,q,c]of e.matchAll(/(\d+) ([\w ]+) bags?/g))i[c]=+q
 d[e.match(/^([\w ]+?) bags/)[1]]=i},d={})

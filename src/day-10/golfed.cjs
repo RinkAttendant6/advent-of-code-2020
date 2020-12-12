@@ -1,5 +1,5 @@
 c={}
-n=[0,...require('fs').readFileSync(__dirname+`/input.txt`,{encoding:`utf8`}).trim().split`
+n=[0,...require('fs').readFileSync(process.argv[2],{encoding:`utf8`}).trim().split`
 `.map(Number).sort((a,b)=>a-b)]
 d=[,0,,1]
 for(i=n.length;i;)++d[n[i]-n[--i]]
