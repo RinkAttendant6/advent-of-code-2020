@@ -1,4 +1,4 @@
-import * as fs from "fs";
+import { parseInputMultipart } from "../shared/utils.js";
 
 type Range = [number, number];
 
@@ -34,15 +34,9 @@ const findValidKeys = (num: number): string[] => {
   return validKeys;
 };
 
-const data = fs
-  .readFileSync(process.argv[2] ?? __dirname + "/input.txt", {
-    encoding: "utf8",
-  })
-  .trim()
-  .split("\n\n")
-  .map((s) => s.split("\n"));
-
-const [info, you, nearby] = data;
+const [info, you, nearby] = parseInputMultipart(
+  process.argv[2] ?? __dirname + "/input.txt"
+);
 
 const rules: IRules = {};
 

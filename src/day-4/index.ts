@@ -1,4 +1,4 @@
-import * as fs from "fs";
+import { parseInputMultipart } from "../shared/utils.js";
 
 /**
  * Determine if passport has all required fields
@@ -30,10 +30,8 @@ const isValidPassport2 = (passport: string): boolean =>
     /\bpid:\d{9}\b/,
   ].every((regex) => regex.test(passport));
 
-const data = fs.readFileSync(process.argv[2] || __dirname + "/input.txt", {
-  encoding: "utf8",
-});
-const passports = data.split("\n\n");
+const data = parseInputMultipart(process.argv[2] ?? __dirname + "/input.txt");
+const passports = data.map((passport) => passport.join(" "));
 
 const part1 = passports.filter(isValidPassport1).length;
 const part2 = passports.filter(isValidPassport2).length;

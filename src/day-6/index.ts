@@ -1,12 +1,6 @@
-import * as fs from "fs";
+import { parseInputMultipart } from "../shared/utils.js";
 
-const filePath: string = process.argv[2] ?? __dirname + "/input.txt";
-
-const groups: string[][] = fs
-  .readFileSync(filePath, { encoding: "utf8" })
-  .trim()
-  .split("\n\n")
-  .map((group: string): string[] => group.split("\n"));
+const groups = parseInputMultipart(process.argv[2] ?? __dirname + "/input.txt");
 
 // Unique union set of answers for entire group
 const part1: number = groups

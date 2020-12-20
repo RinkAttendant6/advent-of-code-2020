@@ -10,6 +10,18 @@ export const parseInput = (filePath) =>
   fs.readFileSync(filePath, { encoding: "utf8" }).trim().split("\n");
 
 /**
+ * Parses a multipart input where each part is separated by a blank line
+ * @param {string} filePath
+ * @return {string[][]}
+ */
+export const parseInputMultipart = (filePath) =>
+  fs
+    .readFileSync(filePath, { encoding: "utf8" })
+    .trim()
+    .split("\n\n")
+    .map((line) => line.split("\n"));
+
+/**
  * Parses an input to an array of numbers
  * @param {string} filePath
  * @returns {number[]}

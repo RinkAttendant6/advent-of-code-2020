@@ -1,4 +1,4 @@
-import * as fs from "fs";
+import { parseInputMultipart } from "../shared/utils.js";
 
 type Token = string | number;
 type Rule = Array<Token>;
@@ -73,12 +73,9 @@ const part2 = (
   });
 };
 
-const [rules, messages] = fs
-  .readFileSync(process.argv[2] ?? __dirname + "/input.txt", {
-    encoding: "utf8",
-  })
-  .split("\n\n")
-  .map((line) => line.split("\n"));
+const [rules, messages] = parseInputMultipart(
+  process.argv[2] ?? __dirname + "/input.txt"
+);
 
 const ruleSet: Rule[][] = [];
 
