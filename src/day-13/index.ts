@@ -26,3 +26,12 @@ const [minWaitingTime, earliestBus]: [number, number] = buses
   );
 
 console.log(minWaitingTime * earliestBus!);
+
+// Part 2
+
+console.log(
+  "https://www.wolframalpha.com/input/?i=" +
+    encodeURIComponent(
+      buses.map((_, idx) => (_ === "x" ? `` : `x+${idx} mod ${_}=0;`)).join(``)
+    )
+);
