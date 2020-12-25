@@ -34,7 +34,7 @@ const denormalizeTile = (normalizedTile: string): Tile => {
 };
 
 (async (filePath: string) => {
-  const tiles = new Set<string>();
+  let tiles = new Set<string>();
 
   for await (const pattern of parseInputAsync(filePath)) {
     let tile: Tile = { x: 0, y: 0 };
